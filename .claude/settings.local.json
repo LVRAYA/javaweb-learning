@@ -4,7 +4,9 @@
       "Bash(cmd *)",
       "Bash(powershell *)",
       "Bash(netstat -ano)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
