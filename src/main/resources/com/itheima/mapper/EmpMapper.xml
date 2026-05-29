@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.EmpMapper">
+    <insert id="insertDept">
+        INSERT INTO emp
+        (username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+        VALUES
+            (#{username},
+             #{name},
+             #{gender},
+             #{image},
+        <if test="job == null">1</if>
+        <if test="job != null">#{job}</if>,
+             #{entrydate},
+             #{deptId},
+             NOW(),
+             NOW())
+    </insert>
+    <select id="listCondition" resultType="com.itheima.pojo.Emp">
+        select * from emp
+        <where>
+            <!-- 姓名：模糊查询 -->
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <!-- 性别：精确查询 -->
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+
+            <!-- 入职日期：起始时间 >= -->
+            <if test="begin != null">
+                AND entrydate >= #{begin}
+            </if>
+
+            <!-- 入职日期：结束时间 &lt;= -->
+            <if test="end != null">
+                AND entrydate &lt;= #{end}
+            </if>
+        </where>
+        order by entrydate desc
+    </select>
+    <select id="getEmpById" resultType="com.itheima.pojo.Emp">
+        select * from emp where id = #{id}
+    </select>
+    <select id="login" resultType="com.itheima.pojo.Emp">
+        select * from emp
+        where username = #{username} and password = #{password}
+    </select>
+    <update id="updateEmp">
+        UPDATE emp
+        <set>
+            <if test="image != null">
+                image = #{image},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>
