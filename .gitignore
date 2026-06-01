@@ -1,10 +1,20 @@
 # Maven
 target/
+*.jar
+*.war
+*.ear
+*.class
 
-# IDE
+# IDE - IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+*.ipr
+out/
+
+# IDE - VS Code
 .vscode/
+*.code-workspace
 
 # OS
 .DS_Store
@@ -12,3 +22,26 @@ Thumbs.db
 
 # Logs
 *.log
+logs/
+
+# Spring Boot 配置文件（关键：避免提交真实密钥）
+src/main/resources/application.yml
+src/main/resources/application.yaml
+src/main/resources/application.properties
+src/main/resources/application-dev.yml
+src/main/resources/application-prod.yml
+src/main/resources/application-local.yml
+
+# 保留模板文件供参考
+!src/main/resources/application.yml.example
+
+# Claude Code
+.claude/
+
+# 阿里云 OSS 密钥文件
+src/main/resources/static/oss密钥.txt
+
+# 其他临时文件
+*.tmp
+*.swp
+*~
